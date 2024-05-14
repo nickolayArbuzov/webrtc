@@ -11,7 +11,9 @@
 <script>
     console.log('Script loaded');
 
-    const socket = io();
+    const socket = io({
+        transports: ['websocket', 'polling'] 
+    });
     const remoteAudio = document.getElementById('remoteAudio');
     let localStream;
 
