@@ -6,7 +6,6 @@
 </head>
 <body>
 <h2>WebRTC Audio Streaming Demo</h2>
-<audio id="localAudio" controls></audio>
 <audio id="remoteAudio" controls></audio>
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -15,7 +14,6 @@
     const socket = io({
         transports: ['websocket', 'polling']  
     });
-    const localAudio = document.getElementById('localAudio');
     const remoteAudio = document.getElementById('remoteAudio');
     let localStream;
 
@@ -30,11 +28,6 @@
 
         navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
             console.log('Microphone access granted');
-            localStream = stream;
-
-            localAudio.srcObject = stream;
-            localAudio.play();
-
             stream.getTracks().forEach(track => {
                 console.log('Adding track to peer connection:', track);
                 peerConnection.addTrack(track, stream);
